@@ -1,0 +1,7 @@
+
+services:
+  ingestion:
+    build: ./ingestion
+    volumes:
+      - ./data/raw:/data/raw
+    restart: unless-stopped
