@@ -1,7 +1,28 @@
 
 services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    
   ingestion:
     build: ./ingestion
+    environment:
+      DB_HOST: postgres
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
+      TWELVE_DATA_API_KEY: ${TWELVE_DATA_API_KEY}
     volumes:
       - ./data/raw:/data/raw
+    depends_on:
+      - postgres
     restart: unless-stopped
+volumes:
+  postgres_data: 
