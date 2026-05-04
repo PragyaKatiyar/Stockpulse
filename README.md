@@ -3,7 +3,7 @@
 End-to-end stock market data engineering pipeline built with Python, Docker, PostgreSQL and Apache Airflow.
 
 ## Architecture
-- **Ingestion** — Fetches OHLCV data for 5 tickers from Yahoo Finance using yfinance
+- **Ingestion** — Fetches OHLCV data for 5 tickers from Tweleve Data API
 - **Storage** — Saves raw CSV files to a local data lake (S3-compatible structure)
 - **Processing** — PySpark transformations (coming soon)
 - **Warehouse** — PostgreSQL (coming soon)
@@ -28,7 +28,7 @@ docker compose up --build
 ```
 stockpulse/
   ingestion/
-    ingest.py         # Fetches stock data from Yahoo Finance
+    ingest.py         # Fetches stock data from Tweleve Data API
     Dockerfile        # Container definition
     requirements.txt  # Python dependencies
   data/
